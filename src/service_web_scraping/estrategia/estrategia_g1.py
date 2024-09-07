@@ -2,6 +2,7 @@ from src.service_web_scraping.i_rss_extracao_strategy import IRssExtracaoStrateg
 import requests
 from typing import Generator, Dict
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 
 class EstrategiaG1(IRssExtracaoStrategy[BeautifulSoup]):
@@ -17,7 +18,7 @@ class EstrategiaG1(IRssExtracaoStrategy[BeautifulSoup]):
 
         return site
 
-    def extrair_dados(self, site: BeautifulSoup) -> Generator[Dict[str, str, str, str], None, None]:
+    def extrair_dados(self, site: BeautifulSoup) -> Generator[Dict[str, str], None, None]:
         itens = site.findAll('item')
         for noticia in itens:
             soup_cleaned = BeautifulSoup(
@@ -27,5 +28,6 @@ class EstrategiaG1(IRssExtracaoStrategy[BeautifulSoup]):
                 'TITULO_NOTICIA': noticia.title.text,
                 'URL_NOTICIA':  noticia.guid.text,
                 'URL_IMG': soup_cleaned.find('img').attrs['src'],
-                'DESCRICAO': soup_cleaned.text
+                'DESCRICAO': soup_cleaned.text,
+                'data_pubicacao': datetime.strptime(noticia.pubdate.text, "%a, %d %b %Y %H:%M:%S %Z").strftime("%d/%m/%Y")
             }
