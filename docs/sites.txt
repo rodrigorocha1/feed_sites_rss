@@ -1,0 +1,21 @@
+https://www.gazetadopovo.com.br/feed/rss/mundo.xml
+https://g1.globo.com/rss/g1/tecnologia/
+https://g1.globo.com/rss/g1/turismo-e-viagem/
+https://g1.globo.com/rss/g1/planeta-bizarro/
+https://g1.globo.com/rss/g1/pa/para/
+https://g1.globo.com/rss/g1/sp/ribeirao-preto-franca/
+https://www.noticiasaominuto.com.br/rss/ultima-hora
+https://www.noticiasaominuto.com.br/rss/tech
+
+Atríbutos a serem extraidos
+tittle
+link 
+description
+image
+pubDate
+
+category -> G1
+edia:content -> g1
+
+enclosure -> Noticias ao minuto
+SITE  - Noticias
