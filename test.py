@@ -1,4 +1,4 @@
-from src.estrategia_g1 import ExtracaoNoticias
+from src.service_web_scraping.estrategia.estrategia_g1 import ExtracaoNoticias
 from bs4 import BeautifulSoup
 # G1
 en = ExtracaoNoticias(
