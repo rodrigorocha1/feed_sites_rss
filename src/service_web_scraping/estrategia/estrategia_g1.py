@@ -1,32 +1,30 @@
-from src.service_web_scraping.i_rss_extracao_strategy import IRssExtracaoStrategy
+from src.service_web_scraping.estrategia.estrategia import Estrategia
 import requests
 from typing import Generator, Dict
 from bs4 import BeautifulSoup
 from datetime import datetime
 
 
-class EstrategiaG1(IRssExtracaoStrategy[BeautifulSoup]):
+class EstrategiaG1(Estrategia[BeautifulSoup]):
 
     def __init__(self, url: str) -> None:
-        self.__url = url
-
-    def obter_dados(self) -> BeautifulSoup:
-        response = requests.get(self.__url)
-        html = response.text
-        site = BeautifulSoup(html, 'html.parser')
-
-        return site
+        super().__init__(url=url)
 
     def extrair_dados(self, site: BeautifulSoup) -> Generator[Dict[str, str], None, None]:
         itens = site.findAll('item')
         for noticia in itens:
-            soup_cleaned = BeautifulSoup(
+            soup = BeautifulSoup(
                 noticia.description.get_text(),
                 'html.parser')
+            img_tag = soup.find('img')
+            url_img = img_tag.attrs['src'] if img_tag and 'src' in img_tag.attrs else None
+            data_publicacao = datetime.strptime(
+                noticia.pubdate.text.strip(), "%a, %d %b %Y %H:%M:%S %z")
+            data_publicacao = data_publicacao.strftime("%d/%m/%Y %H:%M:%S")
             yield {
-                'TITULO_NOTICIA': noticia.title.text,
-                'URL_NOTICIA':  noticia.guid.text,
-                'URL_IMG': soup_cleaned.find('img').attrs['src'],
-                'DESCRICAO': soup_cleaned.text,
-                'data_pubicacao': datetime.strptime(noticia.pubdate.text, "%a, %d %b %Y %H:%M:%S %Z").strftime("%d/%m/%Y")
+                'TITULO_NOTICIA': noticia.title.text.strip(),
+                'URL_NOTICIA':  noticia.guid.text.strip(),
+                'URL_IMG': url_img.strip() if url_img is not None else None,
+                'DESCRICAO': soup.text.strip(),
+                'data_pubicacao': data_publicacao
             }
