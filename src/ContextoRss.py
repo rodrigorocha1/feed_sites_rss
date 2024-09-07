@@ -8,4 +8,5 @@ class NoticiasRss:
     def executar_processamento(self):
         site = self.__estrategia_web_scraping.obter_dados()
         dados = self.__estrategia_web_scraping.extrair_dados(site=site)
-        
+        for dado in dados:
+            print(dado)
