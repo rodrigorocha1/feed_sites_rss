@@ -10,7 +10,6 @@ class EstrategiaG1(IRssExtracaoStrategy[BeautifulSoup]):
     def __init__(self, url: str) -> None:
         self.__url = url
 
-    @property
     def obter_dados(self) -> BeautifulSoup:
         response = requests.get(self.__url)
         html = response.text

@@ -10,6 +10,10 @@ class NoticiasRss:
     def estrategria(self):
         return self.__estrategia_web_scraping
 
+    @estrategria.setter
+    def estrategia(self, estrategria: IRssExtracaoStrategy):
+        self.__estrategia_web_scraping = estrategria
+
     def executar_processamento(self):
         site = self.__estrategia_web_scraping.obter_dados()
         dados = self.__estrategia_web_scraping.extrair_dados(site=site)
