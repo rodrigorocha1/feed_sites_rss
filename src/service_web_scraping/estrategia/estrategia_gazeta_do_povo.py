@@ -1,6 +1,7 @@
 from typing import Dict, Generator
 from src.service_web_scraping.estrategia.estrategia import Estrategia
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 
 class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
@@ -8,4 +9,18 @@ class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
         super().__init__(url=url)
 
     def extrair_dados(self, site: BeautifulSoup) -> Generator[Dict[str, str], None, None]:
-        return super().extrair_dados(site)
+        itens = site.findAll('item')
+        for item in itens:
+            soup = BeautifulSoup(
+                item.description.get_text(), 'html.parser')
+            descricao = soup.get_text()
+            data_publicacao = datetime.strptime(
+                item.pubdate.text.strip(), "%a, %d %b %Y %H:%M:%S %z")
+            data_publicacao = data_publicacao.strftime("%d/%m/%Y %H:%M:%S")
+            yield {
+                'TITULO_NOTICIA': item.title.text.strio(),
+                'URL_NOTICIA':  item.guid.text.strip(),
+                'URL_IMG': item.url.text.strip(),
+                'DESCRICAO': descricao,
+                'data_pubicacao': data_publicacao
+            }
