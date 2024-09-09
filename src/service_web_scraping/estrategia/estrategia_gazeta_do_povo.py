@@ -18,7 +18,7 @@ class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
                 item.pubdate.text.strip(), "%a, %d %b %Y %H:%M:%S %z")
             data_publicacao = data_publicacao.strftime("%d/%m/%Y %H:%M:%S")
             yield {
-                'TITULO_NOTICIA': item.title.text.strio(),
+                'TITULO_NOTICIA': item.title.text.strip(),
                 'URL_NOTICIA':  item.guid.text.strip(),
                 'URL_IMG': item.url.text.strip(),
                 'DESCRICAO': descricao,
