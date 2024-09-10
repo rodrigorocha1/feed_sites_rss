@@ -32,5 +32,5 @@ class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
                 'URL_NOTICIA':  item.guid.text.strip(),
                 'URL_IMG': item.url.text.strip(),
                 'DESCRICAO': descricao,
-                'data_pubicacao': data_publicacao
+                'DATA_PUBLICACAO': data_publicacao
             }
