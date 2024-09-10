@@ -1,10 +1,13 @@
 from abc import ABC, abstractmethod
-from typing import Tuple, List, Any
+from typing import Tuple, List, Any, Generic, TypeVar
 
 
-class IInfraBanco(ABC):
-    @abstractmethod
-    def conectar_banco(self) -> bool:
+T = TypeVar('T')
+
+
+class IInfraBanco(ABC, Generic[T]):
+    @ abstractmethod
+    def conectar_banco(self) -> bool, T:
         """Método para conectar no banco
 
         Returns:
@@ -25,3 +28,4 @@ class IInfraBanco(ABC):
     def fechar_conexao(self):
         """Método para fechar a conexão
         """
+        pass
