@@ -1,4 +1,4 @@
-from src.service_web_scraping.i_rss_extracao_strategy import IRssExtracaoStrategy
+from src.service_web_scraping.estrategia.i_rss_extracao_strategy import IRssExtracaoStrategy
 from src.service_web_scraping.estrategia.estrategia_g1 import EstrategiaG1
 
 
