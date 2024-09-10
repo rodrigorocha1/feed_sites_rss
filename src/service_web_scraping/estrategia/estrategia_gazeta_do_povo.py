@@ -7,6 +7,16 @@ from datetime import datetime
 class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
     def __init__(self, url: str) -> None:
         super().__init__(url=url)
+        self.__id_site = 1
+        self.__nome = 'Gazeta do Povo'
+
+    @property
+    def id_site(self):
+        return self.__id_site
+
+    @property
+    def nome(self):
+        return self.__nome
 
     def extrair_dados(self, site: BeautifulSoup) -> Generator[Dict[str, str], None, None]:
         itens = site.findAll('item')

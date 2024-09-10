@@ -9,6 +9,8 @@ class EstrategiaG1(Estrategia[BeautifulSoup]):
 
     def __init__(self, url: str) -> None:
         super().__init__(url=url)
+        self.__id = 2
+        self.__nome = 'G1'
 
     def extrair_dados(self, site: BeautifulSoup) -> Generator[Dict[str, str], None, None]:
         itens = site.findAll('item')
