@@ -21,3 +21,7 @@ class IInfraBanco(ABC):
             valores (List[Any]): Valores que serão efetivamente amarzenado
         """
         pass
+
+    def fechar_conexao(self):
+        """Método para fechar a conexão
+        """
