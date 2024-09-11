@@ -9,7 +9,7 @@ class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
         super().__init__(url=url)
         self.__id_site = 1
         self.__nome = 'Gazeta do Povo'
-        self.__categoria = url.split('/')[-1].split('.')[0]
+        self.__categoria = self._url.split('/')[-1].split('.')[0]
 
     @property
     def id_site(self):

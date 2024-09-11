@@ -11,7 +11,7 @@ class EstrategiaG1(Estrategia[BeautifulSoup]):
         super().__init__(url=url)
         self.__id = 2
         self.__nome = 'G1'
-        self.__categoria = self.__url.split('/')[-2]
+        self.__categoria = self._url.split('/')[-2]
 
     def extrair_dados(self, site: BeautifulSoup) -> Generator[Dict[str, str], None, None]:
         itens = site.findAll('item')

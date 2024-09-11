@@ -12,10 +12,10 @@ T1 = TypeVar('T1')
 class Estrategia(IRssExtracaoStrategy[T1]):
 
     def __init__(self, url: str) -> None:
-        self.__url = url
+        self._url = url
 
     def obter_dados(self) -> BeautifulSoup:
-        response = requests.get(self.__url)
+        response = requests.get(self._url)
         html = response.text
         site = BeautifulSoup(html, 'html.parser')
 

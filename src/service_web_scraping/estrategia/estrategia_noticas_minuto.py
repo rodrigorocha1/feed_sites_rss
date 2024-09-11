@@ -9,7 +9,7 @@ class EstrategiaNoticiasMinuto(Estrategia[BeautifulSoup]):
         super().__init__(url=url)
         self.__id = 3
         self.__nome = 'Noticias Minuto'
-        self.__categoria = self.__url.split('/')[-1]
+        self.__categoria = self._url.split('/')[-1]
 
     def extrair_dados(self, site: BeautifulSoup) -> Generator[Dict[str, str], None, None]:
         itens = site.findAll('item')
