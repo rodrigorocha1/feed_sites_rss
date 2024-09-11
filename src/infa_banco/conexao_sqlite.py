@@ -14,8 +14,13 @@ class ConexaoSqlite(IInfraBanco):
         self.__cursor = None
 
     def conectar_banco(self):
-        self.__conexao = sqlite3.connect(self.__caminho_banco)
-        self.__cursor = self.__conexao.cursor()
+        try:
+            self.__conexao = sqlite3.connect(self.__caminho_banco)
+            self.__cursor = self.__conexao.cursor()
+        except sqlite3.DatabaseError as msg:
+            pass
+        except sqlite3.OperationalError as msg:
+            pass
 
     def inserir_dados(self, tabela: str, colunas: Tuple[str], valores: List[Any]):
 
@@ -25,9 +30,15 @@ class ConexaoSqlite(IInfraBanco):
             INSERT INTO {tabela} {colunas}
             VALUES ({placeholder})
         """
-
-        self.__cursor.execute(consulta, valores)
-        self.__conexao.commit()
+        try:
+            self.__cursor.execute(consulta, valores)
+            self.__conexao.commit()
+        except sqlite3.DataError as msg:
+            pass
+        except sqlite3.IntegrityError as msg:
+            pass
+        except sqlite3.OperationalError as msg:
+            pass
 
     def fechar_conexao(self):
         if self.__conexao:
