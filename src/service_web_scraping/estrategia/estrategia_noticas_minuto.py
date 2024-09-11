@@ -18,6 +18,7 @@ class EstrategiaNoticiasMinuto(Estrategia[BeautifulSoup]):
             data_hora_publicacao = data_hora_publicacao.strftime(
                 '%d/%m/%Y %H:%M:%S')
             yield {
+                'ID_SITE' : self.__id,
                 'TITULO_NOTICIA': item.title.text.strip(),
                 'URL_NOTICIA': item.guid.text.strip(),
                 'URL_IMG': item.enclosure.attrs['url'],
