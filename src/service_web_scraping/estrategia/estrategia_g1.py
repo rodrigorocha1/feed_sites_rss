@@ -11,6 +11,7 @@ class EstrategiaG1(Estrategia[BeautifulSoup]):
         super().__init__(url=url)
         self.__id = 2
         self.__nome = 'G1'
+        self.__categoria = self.__url.split('/')[-2]
 
     def extrair_dados(self, site: BeautifulSoup) -> Generator[Dict[str, str], None, None]:
         itens = site.findAll('item')
@@ -25,6 +26,8 @@ class EstrategiaG1(Estrategia[BeautifulSoup]):
             data_publicacao = data_publicacao.strftime("%d/%m/%Y %H:%M:%S")
             yield {
                 'ID_SITE': self.__id,
+                'CATEGORIA': self.__categoria,
+                'NOME': self.__nome,
                 'TITULO_NOTICIA': noticia.title.text.strip(),
                 'URL_NOTICIA':  noticia.guid.text.strip(),
                 'URL_IMG': url_img.strip() if url_img is not None else None,

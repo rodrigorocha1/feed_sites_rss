@@ -9,6 +9,7 @@ class EstrategiaNoticiasMinuto(Estrategia[BeautifulSoup]):
         super().__init__(url=url)
         self.__id = 3
         self.__nome = 'Noticias Minuto'
+        self.__categoria = self.__url.split('/')[-1]
 
     def extrair_dados(self, site: BeautifulSoup) -> Generator[Dict[str, str], None, None]:
         itens = site.findAll('item')
@@ -18,7 +19,9 @@ class EstrategiaNoticiasMinuto(Estrategia[BeautifulSoup]):
             data_hora_publicacao = data_hora_publicacao.strftime(
                 '%d/%m/%Y %H:%M:%S')
             yield {
-                'ID_SITE' : self.__id,
+                'ID_SITE': self.__id,
+                'CATEGORIA': self.__categoria,
+                'NOME': self.__nome,
                 'TITULO_NOTICIA': item.title.text.strip(),
                 'URL_NOTICIA': item.guid.text.strip(),
                 'URL_IMG': item.enclosure.attrs['url'],

@@ -9,6 +9,7 @@ class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
         super().__init__(url=url)
         self.__id_site = 1
         self.__nome = 'Gazeta do Povo'
+        self.__categoria = url.split('/')[-1].split('.')[0]
 
     @property
     def id_site(self):
@@ -29,6 +30,8 @@ class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
             data_publicacao = data_publicacao.strftime("%d/%m/%Y %H:%M:%S")
             yield {
                 'ID_SITE': self.__id,
+                'CATEGORIA': self.__categoria,
+                'NOME': self.__nome,
                 'TITULO_NOTICIA': item.title.text.strip(),
                 'URL_NOTICIA':  item.guid.text.strip(),
                 'URL_IMG': item.url.text.strip(),
