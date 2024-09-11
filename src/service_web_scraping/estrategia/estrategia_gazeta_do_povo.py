@@ -11,18 +11,6 @@ class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
         self.__nome = 'Gazeta do Povo'
         self.__categoria = self._url.split('/')[-1].split('.')[0]
 
-    @property
-    def id_site(self):
-        return self.__id_site
-
-    @property
-    def nome(self):
-        return self.__nome
-
-    @property
-    def categoria(self):
-        return self.__categoria
-
     def extrair_dados(self, site: BeautifulSoup) -> Generator[Dict[str, str], None, None]:
         itens = site.findAll('item')
         for item in itens:
@@ -33,7 +21,8 @@ class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
                 item.pubdate.text.strip(), "%a, %d %b %Y %H:%M:%S %z")
             data_publicacao = data_publicacao.strftime("%d/%m/%Y %H:%M:%S")
             yield {
-
+                'ID_SITE': self.__id_site,
+                'NOME_SITE': self.__nome,
                 'TITULO_NOTICIA': item.title.text.strip(),
                 'URL_NOTICIA':  item.guid.text.strip(),
                 'URL_IMG': item.url.text.strip(),

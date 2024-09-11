@@ -10,13 +10,22 @@ class NoticiasRss:
         self.__banco = banco_dados
 
     def executar_processamento(self):
+        dados = self.__estrategia_web_scraping
         site = self.__estrategia_web_scraping.obter_dados()
         dados = self.__estrategia_web_scraping.extrair_dados(site=site)
         self.__banco.conectar_banco()
         for dado in dados:
-            print(tuple(dado.keys()))
-            print(list(dado.values()))
-            print()
+            campos = tuple(dado.keys())
+            valores = list(dado.values())
+            dados_campos_sites = campos[0:2]
+            dados_valores_sites = valores[0:2]
+
+            print('*' * 20)
+            dados_campos_noticias = (campos[0],) + campos[2:]
+            valores_campos_noticias = [valores[0]] + valores[2:]
+            print(valores_campos_noticias)
+
+            break
         self.__banco.fechar_conexao()
 
 
