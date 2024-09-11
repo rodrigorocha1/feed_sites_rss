@@ -1,5 +1,7 @@
 from src.service_web_scraping.estrategia.i_rss_extracao_strategy import IRssExtracaoStrategy
 from src.service_web_scraping.estrategia.estrategia_g1 import EstrategiaG1
+from src.service_web_scraping.estrategia.estrategia_gazeta_do_povo import EstrategiaGazetaPovo
+from src.service_web_scraping.estrategia.estrategia_noticas_minuto import EstrategiaNoticiasMinuto
 from src.infa_banco.iinfra_banco import IInfraBanco
 from src.infa_banco.conexao_sqlite import ConexaoSqlite
 
@@ -23,9 +25,17 @@ class NoticiasRss:
             print('*' * 20)
             dados_campos_noticias = (campos[0],) + campos[2:]
             valores_campos_noticias = [valores[0]] + valores[2:]
-            print(valores_campos_noticias)
+            self.__banco.inserir_dados(
+                tabela='SITE',
+                colunas=dados_campos_sites,
+                valores=dados_valores_sites
+            )
+            self.__banco.inserir_dados(
+                tabela='NOTICIA',
+                colunas=dados_campos_noticias,
+                valores=valores_campos_noticias
+            )
 
-            break
         self.__banco.fechar_conexao()
 
 
@@ -33,6 +43,18 @@ if __name__ == '__main__':
 
     lista_estrategia = [
         EstrategiaG1(url='https://g1.globo.com/rss/g1/tecnologia/'),
+        EstrategiaG1(url='https://g1.globo.com/rss/g1/turismo-e-viagem/'),
+        EstrategiaG1(url='https://g1.globo.com/rss/g1/planeta-bizarro/'),
+        EstrategiaG1(url='https://g1.globo.com/rss/g1/pa/para/'),
+        EstrategiaG1(
+            url='https://g1.globo.com/rss/g1/sp/ribeirao-preto-franca/'),
+        EstrategiaGazetaPovo(
+            url='https://www.gazetadopovo.com.br/feed/rss/mundo.xml'),
+        EstrategiaNoticiasMinuto(
+            url='https://www.noticiasaominuto.com.br/rss/ultima-hora'),
+        EstrategiaNoticiasMinuto(
+            url='https://www.noticiasaominuto.com.br/rss/tech'
+        )
 
     ]
     for estrategia in lista_estrategia:
