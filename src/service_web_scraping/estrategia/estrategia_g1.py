@@ -33,7 +33,7 @@ class EstrategiaG1(Estrategia[BeautifulSoup]):
                 noticia.pubdate.text.strip(), "%a, %d %b %Y %H:%M:%S %z")
             data_publicacao = data_publicacao.strftime("%d/%m/%Y %H:%M:%S")
             yield {
-                'ID_SITE': self.__id,
+
                 'TITULO_NOTICIA': noticia.title.text.strip(),
                 'URL_NOTICIA':  noticia.guid.text.strip(),
                 'URL_IMG': url_img.strip() if url_img is not None else None,
