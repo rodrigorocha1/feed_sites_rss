@@ -24,15 +24,3 @@ class IInfraBanco(ABC,):
         """Método para fechar a conexão
         """
         pass
-
-    @abstractmethod
-    def __enter__(self):
-        pass
-
-    @abstractmethod
-    def __exit__(self, exc_type, exc_value, traceback):
-        pass
-
-    @abstractmethod
-    def __del__(self):
-        pass
