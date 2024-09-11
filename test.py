@@ -1,10 +1,11 @@
-from src.service_web_scraping.estrategia.estrategia_gazeta_do_povo import EstrategiaGazetaPovo
+from src.infa_banco.conexao_sqlite import ConexaoSqlite
 
 
-if __name__ == '__main__':
-    enm = EstrategiaGazetaPovo(
-        url='https://www.noticiasaominuto.com.br/rss/tech'
-    )
-
-    site = enm.obter_dados()
-    print(enm.nome, enm.id_site)
+csqlite = ConexaoSqlite()
+csqlite.conectar_banco()
+csqlite.inserir_dados(
+    tabela='SITE',
+    valores=[1, 'GLOBO'],
+    colunas=('ID_SITE', 'NOME_SITE')
+)
+csqlite.fechar_conexao()

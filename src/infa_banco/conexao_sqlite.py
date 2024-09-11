@@ -25,7 +25,7 @@ class ConexaoSqlite(IInfraBanco):
             INSERT INTO {tabela} {colunas}
             VALUES ({placeholder})
         """
-        print(consulta)
+
         self.__cursor.execute(consulta, valores)
         self.__conexao.commit()
 
