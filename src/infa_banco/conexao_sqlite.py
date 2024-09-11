@@ -19,11 +19,13 @@ class ConexaoSqlite(IInfraBanco):
 
     def inserir_dados(self, tabela: str, colunas: Tuple[str], valores: List[Any]):
 
-        placehoder = ' '.join('?' * len(valores))
+        placeholder = ', '.join('?' * len(valores))
+
         consulta = f"""
             INSERT INTO {tabela} {colunas}
-            VALUES {placehoder}
+            VALUES ({placeholder})
         """
+        print(consulta)
         self.__cursor.execute(consulta, valores)
         self.__conexao.commit()
 
