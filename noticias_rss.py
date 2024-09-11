@@ -12,12 +12,9 @@ class NoticiasRss:
     def executar_processamento(self):
         site = self.__estrategia_web_scraping.obter_dados()
         dados = self.__estrategia_web_scraping.extrair_dados(site=site)
+
         for dado in dados:
-            with self.__banco as banco:
-                banco.
-                print(banco)
-                print(dado)
-                print()
+            print(dado)
 
 
 if __name__ == '__main__':
