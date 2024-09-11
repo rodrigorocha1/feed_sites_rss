@@ -18,10 +18,11 @@ class ConexaoSqlite(IInfraBanco):
         self.__cursor = self.__conexao.cursor()
 
     def inserir_dados(self, tabela: str, colunas: Tuple[str], valores: List[Any]):
-        if not self.__conexao or not self.__cursor:
-            self.conectar_banco()
-        consulta = """
 
+        placehoder = ' '.join('?' * len(valores))
+        consulta = f"""
+            INSERT INTO {tabela} {colunas}
+            VALUES {placehoder}
         """
         self.__cursor.execute(consulta, valores)
         self.__conexao.commit()
@@ -30,5 +31,3 @@ class ConexaoSqlite(IInfraBanco):
         if self.__conexao:
             self.__cursor.close
             self.__conexao.close
-
- 

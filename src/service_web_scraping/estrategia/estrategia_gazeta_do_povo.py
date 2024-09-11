@@ -13,7 +13,7 @@ class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
 
     @property
     def id_site(self):
-        return self.__id
+        return self.__id_site
 
     @property
     def nome(self):

@@ -12,9 +12,12 @@ class NoticiasRss:
     def executar_processamento(self):
         site = self.__estrategia_web_scraping.obter_dados()
         dados = self.__estrategia_web_scraping.extrair_dados(site=site)
-
+        self.__banco.conectar_banco()
         for dado in dados:
-            print(dado)
+            print(tuple(dado.keys()))
+            print(dado.values())
+            print()
+        self.__banco.fechar_conexao()
 
 
 if __name__ == '__main__':
@@ -25,7 +28,9 @@ if __name__ == '__main__':
     ]
     for estrategia in lista_estrategia:
 
-        ns = NoticiasRss(estrategia_web_scraping=estrategia,
-                         banco_dados=ConexaoSqlite())
+        ns = NoticiasRss(
+            estrategia_web_scraping=estrategia,
+            banco_dados=ConexaoSqlite()
+        )
         ns.estrategia = estrategia
         ns.executar_processamento()
