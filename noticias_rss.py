@@ -15,7 +15,7 @@ class NoticiasRss:
         self.__banco.conectar_banco()
         for dado in dados:
             print(tuple(dado.keys()))
-            print(dado.values())
+            print(list(dado.values()))
             print()
         self.__banco.fechar_conexao()
 
