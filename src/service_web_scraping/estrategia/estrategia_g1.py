@@ -31,6 +31,6 @@ class EstrategiaG1(Estrategia[BeautifulSoup]):
                 'TITULO_NOTICIA': noticia.title.text.strip(),
                 'URL_NOTICIA':  noticia.guid.text.strip(),
                 'URL_IMG': url_img.strip() if url_img is not None else None,
-                'DESCRICAO': soup.text.strip(),
+                'DESCRICAO': soup.text.strip().replace('\n', ''),
                 'DATA_PUBLICACAO': data_publicacao
             }

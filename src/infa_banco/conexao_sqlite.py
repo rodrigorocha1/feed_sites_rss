@@ -1,10 +1,10 @@
 from typing import List, Tuple, Any
-from .iinfra_banco import IInfraBanco
+from src.infa_banco.iinfra_banco import IInfraBanco
 import os
 import sqlite3
 
 
-class ConexaoSqlite(IInfraBanco[sqlite3.Connection]):
+class ConexaoSqlite(IInfraBanco):
 
     def __init__(self) -> None:
         self.__caminho_raiz = os.getcwd()
@@ -31,12 +31,4 @@ class ConexaoSqlite(IInfraBanco[sqlite3.Connection]):
             self.__cursor.close
             self.__conexao.close
 
-    def __enter__(self):
-        self.conectar_banco()
-        return self
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        self.fechar_conexao()
-
-    def __del__(self):
-        self.fechar_conexao()
+ 

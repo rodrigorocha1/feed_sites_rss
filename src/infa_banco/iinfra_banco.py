@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Tuple, List, Any, Generic, TypeVar
+from typing import Tuple, List
 
 
-class IInfraBanco(ABC):
+class IInfraBanco(ABC,):
 
     @abstractmethod
     def conectar_banco(self):
@@ -23,4 +23,16 @@ class IInfraBanco(ABC):
     def fechar_conexao(self):
         """Método para fechar a conexão
         """
+        pass
+
+    @abstractmethod
+    def __enter__(self):
+        pass
+
+    @abstractmethod
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+    @abstractmethod
+    def __del__(self):
         pass
