@@ -47,16 +47,27 @@ class NoticiasRss:
 if __name__ == '__main__':
 
     lista_estrategia = [
-        EstrategiaG1(url='https://g1.globo.com/rss/g1/tecnologia/'),
-        EstrategiaG1(url='https://g1.globo.com/rss/g1/turismo-e-viagem/'),
-        EstrategiaG1(url='https://g1.globo.com/rss/g1/planeta-bizarro/'),
-        EstrategiaG1(url='https://g1.globo.com/rss/g1/pa/para/'),
         EstrategiaG1(
-            url='https://g1.globo.com/rss/g1/sp/ribeirao-preto-franca/'),
+            url='https://g1.globo.com/rss/g1/tecnologia/'
+        ),
+        EstrategiaG1(
+            url='https://g1.globo.com/rss/g1/turismo-e-viagem/'
+        ),
+        EstrategiaG1(
+            url='https://g1.globo.com/rss/g1/planeta-bizarro/'
+        ),
+        EstrategiaG1(
+            url='https://g1.globo.com/rss/g1/pa/para/'
+        ),
+        EstrategiaG1(
+            url='https://g1.globo.com/rss/g1/sp/ribeirao-preto-franca/'
+        ),
         EstrategiaGazetaPovo(
-            url='https://www.gazetadopovo.com.br/feed/rss/mundo.xml'),
+            url='https://www.gazetadopovo.com.br/feed/rss/mundo.xml'
+        ),
         EstrategiaNoticiasMinuto(
-            url='https://www.noticiasaominuto.com.br/rss/ultima-hora'),
+            url='https://www.noticiasaominuto.com.br/rss/ultima-hora'
+        ),
         EstrategiaNoticiasMinuto(
             url='https://www.noticiasaominuto.com.br/rss/tech'
         )
