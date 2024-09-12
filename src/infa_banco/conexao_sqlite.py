@@ -1,5 +1,6 @@
 from typing import List, Tuple, Any
 from src.infa_banco.iinfra_banco import IInfraBanco
+from src.pacote_log.config_log import logger
 import os
 import sqlite3
 
@@ -18,9 +19,11 @@ class ConexaoSqlite(IInfraBanco):
             self.__conexao = sqlite3.connect(self.__caminho_banco)
             self.__cursor = self.__conexao.cursor()
         except sqlite3.DatabaseError as msg:
-            pass
+            logger.error(f'Erro ao conectar no banco {msg}')
         except sqlite3.OperationalError as msg:
-            pass
+            logger.error(f'Falha de operação banco {msg}')
+        except Exception as e:
+            logger.critical(f'Falha Geral: {e}')
 
     def inserir_dados(self, tabela: str, colunas: Tuple[str], valores: List[Any]):
 
@@ -34,11 +37,14 @@ class ConexaoSqlite(IInfraBanco):
             self.__cursor.execute(consulta, valores)
             self.__conexao.commit()
         except sqlite3.DataError as msg:
-            pass
+            logger.error(f'Erro ao inserir valor: {msg}')
         except sqlite3.IntegrityError as msg:
             pass
+
         except sqlite3.OperationalError as msg:
-            pass
+            logger.error(f'Error de operação: {msg}')
+        except Exception as e:
+            logger.critical(f'Falha geral {msg}')
 
     def fechar_conexao(self):
         if self.__conexao:

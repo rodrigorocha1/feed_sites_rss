@@ -4,6 +4,7 @@ from src.service_web_scraping.estrategia.estrategia_gazeta_do_povo import Estrat
 from src.service_web_scraping.estrategia.estrategia_noticas_minuto import EstrategiaNoticiasMinuto
 from src.infa_banco.iinfra_banco import IInfraBanco
 from src.infa_banco.conexao_sqlite import ConexaoSqlite
+from src.pacote_log.config_log import logger
 
 
 class NoticiasRss:
@@ -12,31 +13,35 @@ class NoticiasRss:
         self.__banco = banco_dados
 
     def executar_processamento(self):
-        dados = self.__estrategia_web_scraping
-        site = self.__estrategia_web_scraping.obter_dados()
-        dados = self.__estrategia_web_scraping.extrair_dados(site=site)
-        self.__banco.conectar_banco()
-        for dado in dados:
-            campos = tuple(dado.keys())
-            valores = list(dado.values())
-            dados_campos_sites = campos[0:2]
-            dados_valores_sites = valores[0:2]
+        try:
+            dados = self.__estrategia_web_scraping
+            site = self.__estrategia_web_scraping.obter_dados()
+            logger.info(f'Extraindo site: {site.title.text}')
+            dados = self.__estrategia_web_scraping.extrair_dados(site=site)
+            self.__banco.conectar_banco()
+            for dado in dados:
 
-            print('*' * 20)
-            dados_campos_noticias = (campos[0],) + campos[2:]
-            valores_campos_noticias = [valores[0]] + valores[2:]
-            self.__banco.inserir_dados(
-                tabela='SITE',
-                colunas=dados_campos_sites,
-                valores=dados_valores_sites
-            )
-            self.__banco.inserir_dados(
-                tabela='NOTICIA',
-                colunas=dados_campos_noticias,
-                valores=valores_campos_noticias
-            )
+                campos = tuple(dado.keys())
+                valores = list(dado.values())
+                dados_campos_sites = campos[0:2]
+                dados_valores_sites = valores[0:2]
 
-        self.__banco.fechar_conexao()
+                dados_campos_noticias = (campos[0],) + campos[2:]
+                valores_campos_noticias = [valores[0]] + valores[2:]
+                self.__banco.inserir_dados(
+                    tabela='SITE',
+                    colunas=dados_campos_sites,
+                    valores=dados_valores_sites
+                )
+                self.__banco.inserir_dados(
+                    tabela='NOTICIA',
+                    colunas=dados_campos_noticias,
+                    valores=valores_campos_noticias
+                )
+
+            self.__banco.fechar_conexao()
+        except ValueError as msg:
+            logger.info(f'Erro de valor: {msg} site: {site.title.text}')
 
 
 if __name__ == '__main__':

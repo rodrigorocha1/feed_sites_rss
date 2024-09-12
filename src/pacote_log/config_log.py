@@ -5,7 +5,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 
-file_handler = logging.FileHandler('transcricao.log', encoding='utf-8')
+file_handler = logging.FileHandler('rss.log', encoding='utf-8')
 file_handler.setLevel(logging.ERROR)
 
 
