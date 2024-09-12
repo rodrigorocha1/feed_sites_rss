@@ -18,7 +18,7 @@ class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
                 item.description.get_text(), 'html.parser')
             descricao = soup.get_text()
             data_publicacao = datetime.strptime(
-                item.pubdate.text.strip(), "%a, %d %b %Y %H:%M:%S %z")
+                item.pubdate.text.strip(), "%a, %d %b %Y %H:%M:%S GMT")
             data_publicacao = data_publicacao.strftime("%d/%m/%Y %H:%M:%S")
             yield {
                 'ID_SITE': self.__id_site,
