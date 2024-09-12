@@ -25,5 +25,6 @@ class EstrategiaNoticiasMinuto(Estrategia[BeautifulSoup]):
                 'URL_NOTICIA': item.guid.text.strip(),
                 'URL_IMG': item.enclosure.attrs['url'],
                 'DESCRICAO': item.description.text,
+                'CATEGORIA': self.__categoria,
                 'DATA_PUBLICACAO': data_hora_publicacao
             }

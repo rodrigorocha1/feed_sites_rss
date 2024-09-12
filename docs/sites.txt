@@ -19,3 +19,5 @@ edia:content -> g1
 
 enclosure -> Noticias ao minuto
 SITE  - Noticias
+
+https://chromewebstore.google.com/detail/better-tab-speed-dial-new/behkgahlidmeemjefcbgieigiejiglpc?hl=pt-PT Layout
