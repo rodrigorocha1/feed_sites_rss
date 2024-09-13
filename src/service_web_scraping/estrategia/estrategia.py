@@ -1,10 +1,8 @@
-from src.service_web_scraping.estrategia.i_rss_extracao_strategy import IRssExtracaoStrategy
 from abc import abstractmethod
-from typing import Dict, Generator, TypeVar, Generic
+from typing import Dict, Generator, TypeVar
 import requests
 from bs4 import BeautifulSoup
-from datetime import datetime
-
+from src.service_web_scraping.estrategia.i_rss_extracao_strategy import IRssExtracaoStrategy
 
 T1 = TypeVar('T1')
 
@@ -15,7 +13,7 @@ class Estrategia(IRssExtracaoStrategy[T1]):
         self._url = url
 
     def obter_dados(self) -> BeautifulSoup:
-        response = requests.get(self._url)
+        response = requests.get(self._url, timeout=10)
         html = response.text
         site = BeautifulSoup(html, 'html.parser')
 

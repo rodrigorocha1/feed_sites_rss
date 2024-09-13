@@ -1,19 +1,27 @@
-from src.service_web_scraping.estrategia.estrategia import Estrategia
-import requests
 from typing import Generator, Dict
-from bs4 import BeautifulSoup
 from datetime import datetime
+from bs4 import BeautifulSoup
+from src.service_web_scraping.estrategia.estrategia import Estrategia
 
 
 class EstrategiaG1(Estrategia[BeautifulSoup]):
 
     def __init__(self, url: str) -> None:
+
         super().__init__(url=url)
         self.__id_site = 2
         self.__nome = 'G1'
         self.__categoria = self._url.split('/')[-2]
 
     def extrair_dados(self, site: BeautifulSoup) -> Generator[Dict[str, str], None, None]:
+        """_summary_
+
+        Args:
+            site (BeautifulSoup): _description_
+
+        Yields:
+            Generator[Dict[str, str], None, None]: _description_
+        """
         itens = site.findAll('item')
         for noticia in itens:
             soup = BeautifulSoup(

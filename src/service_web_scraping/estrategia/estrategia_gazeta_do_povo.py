@@ -1,7 +1,7 @@
 from typing import Dict, Generator
-from src.service_web_scraping.estrategia.estrategia import Estrategia
-from bs4 import BeautifulSoup
 from datetime import datetime
+from bs4 import BeautifulSoup
+from src.service_web_scraping.estrategia.estrategia import Estrategia
 
 
 class EstrategiaGazetaPovo(Estrategia[BeautifulSoup]):
