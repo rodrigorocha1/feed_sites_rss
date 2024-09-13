@@ -1,2 +1,8 @@
 /venv
 __pycache__
+.idea/.gitignore
+.idea/feed_sites_rss.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
