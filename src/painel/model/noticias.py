@@ -1,6 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from src.painel.model.config_base import Base
-from sqlalchemy.orm import relationship
 
 
 class Noticias(Base):
