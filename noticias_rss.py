@@ -4,7 +4,7 @@ from src.extracao.service_web_scraping.estrategia.estrategia_gazeta_do_povo impo
 from src.extracao.service_web_scraping.estrategia.estrategia_noticas_minuto import EstrategiaNoticiasMinuto
 from src.extracao.infa_banco.iinfra_banco import IInfraBanco
 from src.extracao.infa_banco.conexao_sqlite import ConexaoSqlite
-from src.extracao.pacote_log.config_log import logger
+from src.pacote_log.config_log import logger
 
 
 class NoticiasRss:
