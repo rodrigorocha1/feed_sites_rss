@@ -9,4 +9,7 @@ class Site(Base):
 
     ID_SITE = Column(Integer, primary_key=True, index=True, autoincrement=True)
     NOME_SITE = Column(String)
-    noticias = relationship('Noticias', backref='site', lazy='subquery')
+    noticias = relationship('Noticias', lazy='subquery')
+
+    def __repr__(self):
+        return f"SITE[ID_SITE={self.ID_SITE}, NOME_SITE={self.NOME_SITE}]"
