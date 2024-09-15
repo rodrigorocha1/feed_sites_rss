@@ -9,7 +9,7 @@ def configurar_navegacao():
 
 def tela():
     configurar_navegacao()
-    controller = NoticasControler
+    controller = NoticasControler()
     view = NoticiasView(controller=controller)
     view.exibir_tela()
 
