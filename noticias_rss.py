@@ -1,10 +1,10 @@
-from src.service_web_scraping.estrategia.i_rss_extracao_strategy import IRssExtracaoStrategy
-from src.service_web_scraping.estrategia.estrategia_g1 import EstrategiaG1
-from src.service_web_scraping.estrategia.estrategia_gazeta_do_povo import EstrategiaGazetaPovo
-from src.service_web_scraping.estrategia.estrategia_noticas_minuto import EstrategiaNoticiasMinuto
-from src.infa_banco.iinfra_banco import IInfraBanco
-from src.infa_banco.conexao_sqlite import ConexaoSqlite
-from src.pacote_log.config_log import logger
+from src.extracao.service_web_scraping.estrategia.i_rss_extracao_strategy import IRssExtracaoStrategy
+from src.extracao.service_web_scraping.estrategia.estrategia_g1 import EstrategiaG1
+from src.extracao.service_web_scraping.estrategia.estrategia_gazeta_do_povo import EstrategiaGazetaPovo
+from src.extracao.service_web_scraping.estrategia.estrategia_noticas_minuto import EstrategiaNoticiasMinuto
+from src.extracao.infa_banco.iinfra_banco import IInfraBanco
+from src.extracao.infa_banco.conexao_sqlite import ConexaoSqlite
+from src.extracao.pacote_log.config_log import logger
 
 
 class NoticiasRss:
