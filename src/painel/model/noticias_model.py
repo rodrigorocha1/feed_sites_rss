@@ -2,6 +2,7 @@ from src.painel.model.noticias import Noticias
 from src.painel.model.site import Site
 from src.painel.model.database_connection import DatabaseConnection
 from typing import Tuple
+import pandas as pd
 
 
 class NoticasModel:
@@ -12,8 +13,9 @@ class NoticasModel:
     def obter_sessao(self):
         return self.db.obter_sessao()
 
-    def obter_todas_noticias(self, nome_site: str) -> Tuple[Noticias]:
+    def obter_todas_noticias(self, nome_site: str) -> pd.DataFrame:
         session = self.obter_sessao()
+
         try:
             noticias = session.query(Noticias) \
                 .filter(Site.NOME_SITE == nome_site)    \
@@ -26,6 +28,23 @@ class NoticasModel:
                     Noticias.URL_NOTICIA,
                     Noticias.URL_IMG
             ).all()
-            return noticias
+            df = pd.DataFrame(noticias, columns=[
+                'NOME_SITE',
+                'CATEGORIA',
+                'TITULO_NOTICIA',
+                'DESCRICAO',
+                'URL_NOTICIA',
+                'URL_IMG'
+            ]).astype({
+                'NOME_SITE': 'string',
+                'CATEGORIA': 'string',
+                'TITULO_NOTICIA': 'string',
+                'DESCRICAO': 'string',
+                'URL_NOTICIA': 'string',
+                'URL_IMG': 'string'
+            })
+
+            return df
+
         finally:
             session.close()
