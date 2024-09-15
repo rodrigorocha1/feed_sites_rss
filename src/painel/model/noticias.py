@@ -1,16 +1,15 @@
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-
-
-Base = declarative_base()
+from sqlalchemy import Column, Integer, String, ForeignKey
+from src.painel.model.config_base import Base
+from sqlalchemy.orm import relationship
 
 
 class Noticias(Base):
+
     __tablename__ = "NOTICIA"
 
     ID_NOTICIA = Column(Integer, primary_key=True,
                         index=True, autoincrement=True)
-    ID_SITE = Column(Integer)
+    ID_SITE = Column(Integer, ForeignKey('SITE.ID_SITE'), nullable=False)
     TITULO_NOTICIA = Column(String)
     URL_NOTICIA = Column(String)
     URL_IMG = Column(String)
