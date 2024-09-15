@@ -11,7 +11,7 @@ class DatabaseConnection:
             os.getcwd(), 'scripts', 'noticias_rss.sqlite'
         )
         self.__DATABASE_URL = 'sqlite:///' + self.__CAMINHO_BANCO
-        self.engine = create_engine(self.__DATABASE_URL, echo=True)
+        self.engine = create_engine(self.__DATABASE_URL, echo=False)
         self.session_local = sessionmaker(
             autocommit=False, autoflush=False, bind=self.engine)
 

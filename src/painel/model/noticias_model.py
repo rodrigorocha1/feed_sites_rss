@@ -15,7 +15,16 @@ class NoticasModel:
     def obter_todas_noticias(self) -> List[Noticias]:
         session = self.obter_sessao()
         try:
-            noticias = session.query(Noticias).all()
+            noticias = session.query(Noticias) \
+                .join(Site, Noticias.ID_SITE == Site.ID_SITE) \
+                .with_entities(
+                    Site.NOME_SITE,
+                    Noticias.CATEGORIA,
+                    Noticias.TITULO_NOTICIA,
+                    Noticias.DESCRICAO,
+                    Noticias.URL_NOTICIA,
+                    Noticias.URL_IMG
+            )
             return noticias
         finally:
             session.close()
