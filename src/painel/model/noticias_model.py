@@ -12,11 +12,11 @@ class NoticasModel:
     def obter_sessao(self):
         return self.db.obter_sessao()
 
-    def obter_todas_noticias(self) -> Tuple[Noticias]:
+    def obter_todas_noticias(self, nome_site: str) -> Tuple[Noticias]:
         session = self.obter_sessao()
         try:
             noticias = session.query(Noticias) \
-                    \
+                .filter(Site.NOME_SITE == nome_site)    \
                 .join(Site, Noticias.ID_SITE == Site.ID_SITE) \
                 .with_entities(
                     Site.NOME_SITE,
