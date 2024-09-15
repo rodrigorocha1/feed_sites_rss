@@ -79,5 +79,5 @@ if __name__ == '__main__':
             estrategia_web_scraping=estrategia,
             banco_dados=ConexaoSqlite()
         )
-        ns.estrategia = estrategia
+
         ns.executar_processamento()
