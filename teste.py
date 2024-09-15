@@ -3,4 +3,8 @@ from src.painel.model.noticias_model import NoticasModel
 
 nm = NoticasModel()
 
-print(nm.obter_todas_noticias())
+noticias = nm.obter_todas_noticias()
+print(type(noticias))
+print(noticias)
+for noticia in noticias:
+    print(noticia)

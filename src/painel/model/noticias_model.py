@@ -1,7 +1,7 @@
 from src.painel.model.noticias import Noticias
 from src.painel.model.site import Site
 from src.painel.model.database_connection import DatabaseConnection
-from typing import List
+from typing import Tuple
 
 
 class NoticasModel:
@@ -12,10 +12,11 @@ class NoticasModel:
     def obter_sessao(self):
         return self.db.obter_sessao()
 
-    def obter_todas_noticias(self) -> List[Noticias]:
+    def obter_todas_noticias(self) -> Tuple[Noticias]:
         session = self.obter_sessao()
         try:
             noticias = session.query(Noticias) \
+                    \
                 .join(Site, Noticias.ID_SITE == Site.ID_SITE) \
                 .with_entities(
                     Site.NOME_SITE,
@@ -24,7 +25,7 @@ class NoticasModel:
                     Noticias.DESCRICAO,
                     Noticias.URL_NOTICIA,
                     Noticias.URL_IMG
-            )
+            ).all()
             return noticias
         finally:
             session.close()
