@@ -46,5 +46,24 @@ class NoticiasView():
                 st.markdown("---" * 20)
         with tab_gazeta_povo:
             st.write('Tab Gazeta Povo')
+            site = 'Gazeta do Povo'
+            noticias = self.__controler.obter_noticias(
+                site=site, categoria='mundo')
+            for noticia in noticias.itertuples(index=False):
+
+                col1, col2 = st.columns([2, 4])
+                with col1:
+                    try:
+                        st.image(noticia.URL_IMG, width=200)
+                    except:
+                        st.text('Sem imagem')
+
+                with col2:
+                    st.write(f'Data publicação: {noticia.DATA_PUBLICACAO}')
+                    st.subheader(noticia.TITULO_NOTICIA)
+                    st.write(noticia.URL_NOTICIA)
+                    st.write(noticia.DESCRICAO)
+
+                st.markdown("---" * 20)
         with tab_noticas_minuto:
             st.write('Tab notícias minuto')

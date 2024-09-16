@@ -56,4 +56,5 @@ class NoticasModel:
             return df
 
         finally:
+            print('Fechando conexão')
             session.close()

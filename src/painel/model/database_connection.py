@@ -11,12 +11,21 @@ class DatabaseConnection:
             os.getcwd(), 'scripts', 'noticias_rss.sqlite'
         )
         self.__DATABASE_URL = 'sqlite:///' + self.__CAMINHO_BANCO
-        self.engine = create_engine(self.__DATABASE_URL, echo=False)
+        self.engine = create_engine(
+            self.__DATABASE_URL, echo=False, isolation_level="AUTOCOMMIT", connect_args={'timeout': 30})
         self.session_local = sessionmaker(
             autocommit=False, autoflush=False, bind=self.engine)
 
     def obter_sessao(self):
-        return self.session_local()
+
+        session = self.session_local()
+        try:
+            return session
+        except Exception:
+            session.rollback()
+            raise
+        finally:
+            session.close()
 
     def iniciar_banco(self):
         Base.metadata.create_all(bind=self.engine)
