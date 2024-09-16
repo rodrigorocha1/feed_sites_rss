@@ -1,6 +1,5 @@
 import streamlit as st
 from src.painel.controller.noticias_controller import NoticasControler
-import textwrap
 
 
 class NoticiasView():
@@ -40,9 +39,7 @@ class NoticiasView():
 
                 with col2:
                     st.write(f'Data publicação: {noticia.DATA_PUBLICACAO}')
-                    titulo_quebrado = textwrap.fill(
-                        noticia.TITULO_NOTICIA, width=60)
-                    st.write(titulo_quebrado)
+                    st.subheader(noticia.TITULO_NOTICIA)
                     st.write(noticia.URL_NOTICIA)
                     st.write(noticia.DESCRICAO)
 
