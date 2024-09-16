@@ -34,7 +34,7 @@ class NoticasModel:
                     Noticias.URL_NOTICIA,
                     Noticias.URL_IMG,
                     Noticias.DATA_PUBLICACAO
-            ).order_by(Noticias.DATA_PUBLICACAO.desc()).all()
+            ).order_by(Noticias.DATA_PUBLICACAO.desc()).distinct().all()
             df = pd.DataFrame(noticias, columns=[
                 'NOME_SITE',
                 'CATEGORIA',
