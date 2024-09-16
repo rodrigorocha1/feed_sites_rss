@@ -39,6 +39,7 @@ class NoticiasView():
                         st.text('Sem imagem')
 
                 with col2:
+                    st.write(f'Data publicação: {noticia.DATA_PUBLICACAO}')
                     titulo_quebrado = textwrap.fill(
                         noticia.TITULO_NOTICIA, width=60)
                     st.write(titulo_quebrado)

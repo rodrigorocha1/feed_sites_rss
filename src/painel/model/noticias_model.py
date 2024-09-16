@@ -32,7 +32,8 @@ class NoticasModel:
                     Noticias.TITULO_NOTICIA,
                     Noticias.DESCRICAO,
                     Noticias.URL_NOTICIA,
-                    Noticias.URL_IMG
+                    Noticias.URL_IMG,
+                    Noticias.DATA_PUBLICACAO
             ).order_by(Noticias.DATA_PUBLICACAO.desc()).all()
             df = pd.DataFrame(noticias, columns=[
                 'NOME_SITE',
@@ -40,14 +41,16 @@ class NoticasModel:
                 'TITULO_NOTICIA',
                 'DESCRICAO',
                 'URL_NOTICIA',
-                'URL_IMG'
+                'URL_IMG',
+                'DATA_PUBLICACAO'
             ]).astype({
                 'NOME_SITE': 'string',
                 'CATEGORIA': 'string',
                 'TITULO_NOTICIA': 'string',
                 'DESCRICAO': 'string',
                 'URL_NOTICIA': 'string',
-                'URL_IMG': 'string'
+                'URL_IMG': 'string',
+                'DATA_PUBLICACAO': 'string'
             })
 
             return df
