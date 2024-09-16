@@ -3,12 +3,22 @@ from src.painel.view.noticias_view import NoticiasView
 import streamlit as st
 
 
-def configurar_navegacao():
-    st.set_page_config(page_title='Feed de Nóticias', layout='wide')
+def estilizar_abas():
+    st.markdown(
+        """
+        <style>
+        .stMarkdownContainer {
+            font-size: 40px;  /* Ajuste o tamanho da fonte conforme necessário */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 def tela():
-    configurar_navegacao()
+
+    estilizar_abas()
     controller = NoticasControler()
     view = NoticiasView(controller=controller)
     view.exibir_tela()

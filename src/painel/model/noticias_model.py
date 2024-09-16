@@ -3,6 +3,7 @@ from src.painel.model.site import Site
 from src.painel.model.database_connection import DatabaseConnection
 from typing import Tuple
 import pandas as pd
+from sqlalchemy import and_
 
 
 class NoticasModel:
@@ -13,12 +14,17 @@ class NoticasModel:
     def obter_sessao(self):
         return self.db.obter_sessao()
 
-    def obter_todas_noticias(self, nome_site: str) -> pd.DataFrame:
+    def obter_todas_noticias(self, nome_site: str, categoria: str) -> pd.DataFrame:
         session = self.obter_sessao()
 
         try:
             noticias = session.query(Noticias) \
-                .filter(Site.NOME_SITE == nome_site)    \
+                .filter(
+                    and_(
+                        Site.NOME_SITE == nome_site,
+                        Noticias.CATEGORIA == categoria
+                    )
+            )    \
                 .join(Site, Noticias.ID_SITE == Site.ID_SITE) \
                 .with_entities(
                     Site.NOME_SITE,
